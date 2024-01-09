@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Admin Dashboard</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<style type="text/css">
+.navbar-nav {
+	float: none;
+}
+
+.navbar-nav .nav-link {
+	padding-right: 20px;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Employee Management System</a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/admin}">Employee
+						Management</a></li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="/index">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<h1>Employee List</h1>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-3">
+				<a th:href="@{/addEmployee}" class="btn btn-primary btn-sm mb-3">
+					Add Employee</a>
+			</div>
+		</div>
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Employee First Name</th>
+					<th>Employee Second Name</th>
+					<th>Employee Email</th>
+					<th>All Details</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="employee: ${employees}">
+					<td th:text="${employee.firstName}"></td>
+					<td th:text="${employee.secondName}"></td>
+					<td th:text="${employee.email}"></td>
+					<td><a th:href="@{/employeeDetails/{id}(id=${employee.id})}">View
+							All Details</a></td>
+					<td><a th:href="@{/employee/edit/{id}(id=${employee.id})}"
+						class="btn btn-primary">Update</a> <a
+						th:href="@{/deleteEmployee/{id}(id=${employee.id})}"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+
+</body>
+</html>

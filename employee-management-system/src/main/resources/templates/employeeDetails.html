@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Employee Details</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<style>
+.employee-details {
+	margin: 50px auto;
+	width: 60%;
+	border: 1px solid #ccc;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background-color: #fff;
+	font-family: Arial, sans-serif;
+}
+
+.employee-details h2 {
+	text-align: center;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+.details-form {
+	width: 100%;
+}
+
+.details-form label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #444;
+}
+
+.details-form span {
+	display: block;
+	margin-bottom: 15px;
+	color: #666;
+}
+
+.button-container {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.button-container button {
+	padding: 10px 20px;
+	margin: 0 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.button-container button.update {
+	background-color: #007bff;
+	color: #fff;
+}
+
+.button-container button.delete {
+	background-color: #dc3545;
+	color: #fff;
+}
+
+.button-container button.back {
+	background-color: #6c757d;
+	color: #fff;
+}
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<!-- Brand -->
+		<a class="navbar-brand" href="#">Employee Management System</a>
+
+		<!-- Toggler/collapsibe Button -->
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/admin}">Employee
+						Management</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="employee-details">
+		<h2>Employee Details</h2>
+		<div class="details-form">
+			<label>First Name:</label> <span th:text="${employee.firstName}"></span>
+
+			<label>Last Name:</label> <span th:text="${employee.secondName}"></span>
+
+			<label>Email:</label> <span th:text="${employee.email}"></span> <label>Phone
+				Number:</label> <span th:text="${employee.phoneNo}"></span> <label>Address:</label>
+			<span th:text="${employee.address}"></span> <label>Gender:</label> <span
+				th:text="${employee.gender}"></span> <label>Join Date:</label> <span
+				th:text="${employee.joinDate}"></span> <label>Department:</label> <span
+				th:text="${employee.department}"></span> <label>Position:</label> <span
+				th:text="${employee.position}"></span> <label>Salary:</label> <span
+				th:text="${employee.salary}"></span> <label>Supervisor:</label> <span
+				th:text="${employee.supervisor}"></span> <label>Project:</label> <span
+				th:text="${employee.project}"></span> <label>Education:</label> <span
+				th:text="${employee.education}"></span> <label>Status:</label> <span
+				th:text="${employee.status}"></span>
+		</div>
+		<div class="button-container">
+			<a th:href="@{/employee/edit/{id}(id=${employee.id})}"><button class="update">Update</button></a>
+			<a th:href="@{/deleteEmployee/{id}(id=${employee.id})}"><button class="delete">Delete</button></a>
+			<a th:href="@{/admin}"><button class="back">Go Back</button></a>
+		</div>
+	</div>
+</body>
+</html>
