@@ -11,20 +11,9 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-		<!-- Brand -->
-		<a class="navbar-brand" href="#">Employee Management System</a>
-
-		<!-- Toggler/collapsibe Button -->
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#collapsibleNavbar">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<!-- Navbar links -->
 		<div class="collapse navbar-collapse" id="collapsibleNavbar">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" th:href="@{/admin}">Employee
-						Management</a></li>
+				<li class="nav-item"><a class="nav-link" th:href="@{/admin}">Employee Management</a></li>
 			</ul>
 		</div>
 	</nav>
@@ -32,24 +21,24 @@
 	<h2>Add Employee</h2>
 	<form action="/addEmployee" method="post">
 		<input type="text" name="firstName" placeholder="First Name" required>
-		<input type="text" name="secondName" placeholder="Second Name"
-			required> <input type="email" name="email"
-			placeholder="Email" required> <input type="tel"
-			name="phoneNo" placeholder="Phone Number" required> <input
-			type="text" name="address" placeholder="Address" required> <select
-			name="gender" required>
+		<input type="text" name="secondName" placeholder="Second Name" required> 
+		<input type="email" name="email" placeholder="Email" required> 
+		<input type="tel" name="phoneNo" placeholder="Phone Number" required> 
+		<input type="text" name="address" placeholder="Address" required> 
+		<select name="gender" required>
 			<option value="">Select Gender</option>
 			<option value="Male">Male</option>
 			<option value="Female">Female</option>
 			<option value="Other">Other</option>
-		</select> <input type="date" name="joinDate" placeholder="Join Date" required>
+		</select> 
+		<input type="date" name="joinDate" placeholder="Join Date" required>
 		<input type="text" name="department" placeholder="Department" required>
 		<input type="text" name="position" placeholder="Position" required>
 		<input type="text" name="salary" placeholder="Salary" required>
-		<input type="text" name="supervisor" placeholder="Supervisor">
-		<input type="text" name="project" placeholder="Project"> <input
-			type="text" name="education" placeholder="Education"> <input
-			type="text" name="status" placeholder="Status">
+		<input type="text" name="supervisor" placeholder="Supervisor" required>
+		<input type="text" name="project" placeholder="Project" required> 
+		<input type="text" name="education" placeholder="Education" required> 
+		<input type="text" name="status" placeholder="Status" required>
 		<button type="submit">Add Employee</button>
 	</form>
 </body>
