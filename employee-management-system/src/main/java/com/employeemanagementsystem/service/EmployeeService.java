@@ -20,4 +20,6 @@ public interface EmployeeService {
 
 	List<Employee> fetchAllEmployeeByAdminId(long id);
 
+	List<Employee> filterEmployees(String department, String position);
+
 }

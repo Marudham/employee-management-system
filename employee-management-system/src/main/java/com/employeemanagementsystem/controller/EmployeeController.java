@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.employeemanagementsystem.entities.Employee;
 import com.employeemanagementsystem.service.EmployeeService;
@@ -83,5 +84,20 @@ public class EmployeeController {
 		model.addAttribute("employees", employeeService.fetchAllEmployeeByAdminId((long)session.getAttribute("adminId")));
 		return "adminHome";
 	}
+	
+
+	@GetMapping("/filter")
+	public String filter(Model model) {
+		model.addAttribute("employees",employeeService.fetchAllEmployee());
+		return "filter";
+	}
+	
+	@GetMapping("/applyFilter")
+	public String applyFilter(@RequestParam("filterDepartment") String department, @RequestParam("filterPosition") String position, Model model) {
+		model.addAttribute("employees",employeeService.fetchAllEmployee());
+		model.addAttribute("filterEmployees", employeeService.filterEmployees(department,position));
+		return "filter";
+	}
+	
 	
 }

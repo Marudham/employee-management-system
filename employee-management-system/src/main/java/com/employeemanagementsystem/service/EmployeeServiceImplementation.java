@@ -54,4 +54,9 @@ public class EmployeeServiceImplementation implements EmployeeService{
 		return employeeRepo.findByAddedByAdminId(id);
 	}
 
+	@Override
+	public List<Employee> filterEmployees(String department, String position) {
+		return employeeRepo.findByDepartmentPosition(department,position);
+	}
+
 }
