@@ -15,25 +15,33 @@ public class User {
 	private String email;
 	private String password;
 	private String role;
+	private boolean isVerified;
+	private boolean isAdmin;
+	private String emailVerificationToken;
 	
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", role="
-				+ role + "]";
+				+ role + ", isVerified=" + isVerified + ", isAdmin=" + isAdmin + ", emailVerificationToken="
+				+ emailVerificationToken + "]";
 	}
-	
+
 	public User() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(long id, String username, String email, String password, String role) {
+	public User(long id, String username, String email, String password, String role, boolean isVerified,
+			boolean isAdmin, String emailVerificationToken) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.role = role;
+		this.isVerified = isVerified;
+		this.isAdmin = isAdmin;
+		this.emailVerificationToken = emailVerificationToken;
 	}
 
 	public long getId() {
@@ -74,6 +82,30 @@ public class User {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public boolean isVerified() {
+		return isVerified;
+	}
+
+	public void setVerified(boolean isVerified) {
+		this.isVerified = isVerified;
+	}
+
+	public boolean isAdmin() {
+		return isAdmin;
+	}
+
+	public void setAdmin(boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public String getEmailVerificationToken() {
+		return emailVerificationToken;
+	}
+
+	public void setEmailVerificationToken(String emailVerificationToken) {
+		this.emailVerificationToken = emailVerificationToken;
 	}
 	
 }

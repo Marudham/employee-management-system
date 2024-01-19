@@ -21,63 +21,71 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	EmployeeService employeeService;
-	
-	@PostMapping("/user")
+
+	@PostMapping("/login")
 	public String login(@RequestParam String email, @RequestParam String password,Model model,HttpSession session) {
 		if(userService.isUserExist(email)) {
 			if(userService.isValidUser(email,password)) {
-				if(userService.getUser(email).getRole().equals("admin")) {
-					session.setAttribute("adminId", userService.getUser(email).getId());
-					model.addAttribute("employees", employeeService.fetchAllEmployeeByAdminId((long)session.getAttribute("adminId")));
-					return "adminHome";
-//					model.addAttribute("employees", employeeService.fetchAllEmployeeByAdminId(userService.getUser(email).getId()));
-//					return "adminHome";
+				if(userService.getUser(email).isAdmin()) {
+					if(userService.getUser(email).isVerified()) {
+						session.setAttribute("adminId", userService.getUser(email).getId());
+						model.addAttribute("employees", employeeService.fetchAllEmployeeByAdminId((long)session.getAttribute("adminId")));
+						return "adminHome";
+					}else {
+						model.addAttribute("message", "Entered Email is not verified, Check your Email or Click on Verify Email");
+						model.addAttribute("verify", true);
+						return "login";
+					}
 				}else {
-//					session.setAttribute("employeeId", employeeService.getEmployeeByEmail(email));
-					Employee emp = employeeService.getEmployeeByEmail(email);
-					model.addAttribute("employee",emp);
-					model.addAttribute("adminInfo", userService.getUserById(emp.getAddedByAdminId()));
-					return "employeeHome";
+					model.addAttribute("message", "Entered Email is not Approved By SUPER_ADMIN");
+					return "login";
 				}
 			}else {
+				model.addAttribute("message", "Incorrect Password");
 				return "login";
 			}
 		}else {
-			return "register";
+			model.addAttribute("message", "Entered Email Does not exist");
+			return "login";
 		}
 	}
-	
+
 	@PostMapping("/register")
 	public String register(@ModelAttribute User user,Model model) {
-		if(user.getRole().equals("admin")) {
-			if(!userService.isUserExist(user.getEmail())) {
-				userService.addUser(user);
-				return "index";
+		if(!userService.isUserExist(user.getEmail())) {
+			user.setRole("Admin");
+			if(userService.addUser(user) == 0) {
+				model.addAttribute("message", "Registered Successfully");
+				model.addAttribute("note", true);
 			}else {
-				return "register";
+				model.addAttribute("message", "Some Problem Occured while Register, Please Try Again");				
 			}
+			return "register";
 		}else {
-			if(employeeService.isEmployeeExist(user.getEmail())) {
-				userService.addUser(user);
-				return "index";
-			}else {
-//				model.addAttribute("message", "Entered Email is not of an Employee");
-				return "register";
-			}
+			model.addAttribute("message", "Entered Email already Registered");
+			return "register";
 		}
-	
+
 	}
-	
+
 	@GetMapping("/adminInfo/{id}")
 	public String adminInfo(@PathVariable long id, Model model) {
 		model.addAttribute("adminInfo", userService.getUserById(id));
 		return "adminInfo";
 	}
-	
 
-	
-	
+	@GetMapping("/verify")
+	public String verifyToken(@RequestParam String token, @RequestParam Long id) {
+		if(userService.verifyToken(id,token)) {
+			//
+			return "login"; 
+		}else {
+			return "index";
+		}
+	}
+
+
 }

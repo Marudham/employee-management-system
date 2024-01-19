@@ -7,16 +7,16 @@
 <body>
 	<form action="/register" method="post">
 		<h2>Registration</h2>
-	<!-- <p th:text="${message}"></p> -->	
+		<div th:if="${message}" style="color:red;">
+			<p th:text="${message}"></p>
+		</div>	
 		<input type="text" name="username" placeholder="Username" required>
 		<input type="email" name="email" placeholder="Email" required>
 		<input type="password" name="password" placeholder="Password" required>
-		<select name="role" required>
-			<option value="">Select Role</option>
-			<option value="admin">Admin</option>
-			<option value="employee">Employee</option>
-		</select>
 		<button type="submit">Register</button>
+		<div th:if="${note}">
+			<p>You will be receive an Email once the SUPER_ADMIN has approver you as Admin</p>
+		</div><p></p>
 		<p>Already Registered ? <a href="/login">Login</a></p>
 	</form>
 </body>

@@ -40,6 +40,20 @@ button {
     cursor: pointer;
 }
 
+.verify{
+	width:100px;
+	padding:6px;
+}
+
+.message{
+	color: red;
+}
+
+.verify-div{
+	position: absolute;
+	height:16vh;
+}
+
 button:hover {
     background-color: #0056b3;
 }
