@@ -1,0 +1,123 @@
+package com.employeemanagementsystem.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.employeemanagementsystem.service.SuperAdminService;
+import com.employeemanagementsystem.entities.Admin;
+import com.employeemanagementsystem.service.AdminService;
+import com.employeemanagementsystem.service.EmailService;
+
+@Controller
+public class SuperAdminController {
+
+	@Autowired
+	SuperAdminService superAdminService;
+
+	@Autowired
+	AdminService adminService;
+	
+	@Autowired
+	EmailService emailService;
+
+	@PostMapping("/superAdminLogin")
+	public String superAdminLogin(@RequestParam String email, @RequestParam String password, Model model) {
+		if(superAdminService.isSuperAdminExist(email)) {
+			if(superAdminService.isValidSuperAdmin(email, password)) {
+				model.addAttribute("admins", adminService.getAllAdmins());
+				return "superAdmin";
+			}else {
+				model.addAttribute("message", "Incorrect Password");
+				return "superAdminLogin";
+			}
+		}else {
+			model.addAttribute("message", "Entered Email Does not exist");
+			return "superAdminLogin";
+		}
+	}
+
+	@GetMapping("/approve/{id}")
+	public String approve(@PathVariable Long id, Model model) {
+		try {
+			Admin admin = adminService.getAdminById(id);
+			admin.setAdmin(true);
+			adminService.updateAdmin(admin);
+			String subject = "Approval Status - Employee Management Status";
+			String body = "You Have Been Approved By the SUPER_ADMIN";
+			emailService.sendEmail(admin.getEmail(), subject, body);
+			model.addAttribute("admins", adminService.getAllAdmins());
+			model.addAttribute("message", "Approve Status has been Updated");
+			return "superAdmin";
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", "Some problem occured while updating approve status");
+			model.addAttribute("admins", adminService.getAllAdmins());
+			return "superAdmin";
+		}
+	}
+	
+	@GetMapping("/disapprove/{id}")
+	public String disapprove(@PathVariable Long id, Model model) {
+		try {
+			Admin admin = adminService.getAdminById(id);
+			admin.setAdmin(false);
+			adminService.updateAdmin(admin);
+			String subject = "Approval Status - Employee Management Status";
+			String body = "You Have Been Disapproved By the SUPER_ADMIN";
+			emailService.sendEmail(admin.getEmail(), subject, body);
+			model.addAttribute("admins", adminService.getAllAdmins());
+			model.addAttribute("message", "Approve Status has been Updated");
+			return "superAdmin";
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", "Some problem occured while updating approve status");
+			model.addAttribute("admins", adminService.getAllAdmins());
+			return "superAdmin";
+		}
+	}
+
+	@GetMapping("/sendMail/{id}")
+	public String sendMail(@PathVariable Long id, Model model) {
+		try {
+			adminService.sendVerificationEmail(adminService.getAdminById(id).getEmail());
+			model.addAttribute("message", "Verification Email has been Sent");
+			model.addAttribute("admins", adminService.getAllAdmins());
+			return "superAdmin";
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", "Problem Occured While sending Email, Enter a Valid Email or try Again");
+			model.addAttribute("admins", adminService.getAllAdmins());
+			return "superAdmin";
+		}
+	}
+
+	@GetMapping("/deleteAdmin/{id}")
+	public String deleteAdmin(@PathVariable Long id, Model model) {
+		try {
+			adminService.deleteAdmin(id);
+			model.addAttribute("message", "Admin has been Deleted");
+			model.addAttribute("admins", adminService.getAllAdmins());
+			return "superAdmin";
+		}catch(Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", "Problem Occured While Deleting the Admin, Please try again");
+			model.addAttribute("admins", adminService.getAllAdmins());
+			return "superAdmin";
+		}
+	}
+	
+
+	@GetMapping("/superAdmin")
+	public String superAdmin(Model model) {
+		model.addAttribute("admins", adminService.getAllAdmins());
+		return "superAdmin";
+	}
+}

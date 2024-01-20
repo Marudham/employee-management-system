@@ -11,12 +11,11 @@ public class EmailService {
     @Autowired
     private JavaMailSender javaMailSender;
 
-    public void sendVerificationEmail(String to, String verificationToken, Long id) {
+    public void sendEmail(String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(to);
-        message.setSubject("Account Verification - Employee Management System");
-        message.setText("To verify your account, click the following link: "
-                + "http://localhost:8080/verify?token=" + verificationToken + "&id=" + id);
+        message.setSubject(subject);
+        message.setText(body);
 
         javaMailSender.send(message);
     }

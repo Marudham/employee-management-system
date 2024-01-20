@@ -14,10 +14,10 @@
 		<input type="email" name="email" placeholder="Email" required>
 		<input type="password" name="password" placeholder="Password" required>
 		<button type="submit">Register</button>
-		<div th:if="${note}">
+		<div th:if="${note}" style="color:blue;">
 			<p>You will be receive an Email once the SUPER_ADMIN has approver you as Admin</p>
 		</div><p></p>
-		<p>Already Registered ? <a href="/login">Login</a></p>
+		<p>Already Registered ? <a class="reg" href="/login">Login</a></p>
 	</form>
 </body>
 </html>

@@ -29,4 +29,21 @@ public class NavController {
 		return "login";
 	}
 	
+	
+	@GetMapping("/superAdminLogin")
+	public String superAdminLogin() {
+		return "superAdminLogin";
+	}
+	
+	@GetMapping("/requestEmail")
+	public String requestEmail() {
+		return "requestEmail";
+	}
+	
+	@GetMapping("/employeeLogin")
+	public String employeeLogin() {
+		return "employeeLogin";
+	}
+	
+	
 }

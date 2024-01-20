@@ -1,70 +1,93 @@
 /* styles.css */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: #f0f0f0;
 }
 
 form {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    width: 300px; /* Adjust the width as needed */
-    margin: 0 auto;
+	background-color: white;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+	width: 300px; /* Adjust the width as needed */
+	margin: 0 auto;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
+input[type="text"], input[type="email"], input[type="password"], select
+	{
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
 }
 
 button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-radius: 3px;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 3px;
+	background-color: #007bff;
+	color: white;
+	cursor: pointer;
 }
 
-.verify{
-	width:100px;
-	padding:6px;
+.verify {
+	width: 100px;
+	padding: 6px;
 }
 
-.message{
+.message {
 	color: red;
 }
 
-.verify-div{
+.verify-div {
 	position: absolute;
-	height:16vh;
+	height: 20vh;
 }
 
 button:hover {
-    background-color: #0056b3;
+	background-color: #0056b3;
+}
+
+.super {
+	text-decoration: none;
+	color: red;
+	transition: border-bottom 0.3s ease;
+}
+
+.super:hover {
+	text-decoration: none;
+	border-bottom: 3px solid red;
+}
+
+.emp,.reg{
+	text-decoration: none;
+}
+
+.emp:hover, .reg:hover{
+	text-decoration: none;
+	border-bottom: 2px solid ;
+}
+
+p{
+	font-family: Arial, sans-serif;
 }
 
 select {
-    /* Styling for select element */
-    appearance: none;
-    padding: 10px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
-    background-repeat: no-repeat;
-    background-position: right 8px center;
+	/* Styling for select element */
+	appearance: none;
+	padding: 10px;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	background-image:
+		url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="%23333"><path d="M7 10l5 5 5-5z"/></svg>');
+	background-repeat: no-repeat;
+	background-position: right 8px center;
 }

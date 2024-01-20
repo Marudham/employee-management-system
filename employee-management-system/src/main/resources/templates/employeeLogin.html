@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Employee Login</title>
+<link rel="stylesheet" href="loginStyle.css">
+</head>
+<body>
+	<form action="/prepareLink" method="post">
+		<h2>Employee Login</h2>
+		<div class="message" th:if="${message}">
+			<p th:text="${message}"></p>
+		</div>
+		<input type="email" name="email" placeholder="Email" required>
+		<button type="submit">Prepare Verification Link</button>
+		
+		<p>
+			New User ? <a class="reg" href="/register">Register</a>
+		</p>
+	</form>
+	
+</body>
+</html>

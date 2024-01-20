@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class User {
+public class Admin {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,31 +14,29 @@ public class User {
 	private String username;
 	private String email;
 	private String password;
-	private String role;
 	private boolean isVerified;
 	private boolean isAdmin;
 	private String emailVerificationToken;
 	
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password + ", role="
-				+ role + ", isVerified=" + isVerified + ", isAdmin=" + isAdmin + ", emailVerificationToken="
+		return "Admin [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
+				+ ", isVerified=" + isVerified + ", isAdmin=" + isAdmin + ", emailVerificationToken="
 				+ emailVerificationToken + "]";
 	}
 
-	public User() {
+	public Admin() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(long id, String username, String email, String password, String role, boolean isVerified,
+	public Admin(long id, String username, String email, String password, boolean isVerified,
 			boolean isAdmin, String emailVerificationToken) {
 		super();
 		this.id = id;
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.role = role;
 		this.isVerified = isVerified;
 		this.isAdmin = isAdmin;
 		this.emailVerificationToken = emailVerificationToken;
@@ -74,14 +72,6 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	public boolean isVerified() {
