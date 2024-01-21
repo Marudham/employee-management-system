@@ -15,25 +15,30 @@ public class Employee {
 	private String secondName;
 	private String email;
 	private String phoneNo;
+	private String dateOfBirth;
 	private String address;
 	private String gender;
+	private String education;
+	private String percentage10;
+	private String percentage12;
+	private String percentageDeg;
 	private String joinDate;
 	private String department;
 	private String position;
 	private String salary;
 	private String supervisor;
 	private String project;
-	private String education;
 	private String status;
 	private long addedByAdminId;
 	
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", secondName=" + secondName + ", email=" + email
-				+ ", phoneNo=" + phoneNo + ", address=" + address + ", gender=" + gender + ", joinDate=" + joinDate
-				+ ", department=" + department + ", position=" + position + ", salary=" + salary + ", supervisor="
-				+ supervisor + ", project=" + project + ", education=" + education + ", status=" + status
-				+ ", addedByAdminId=" + addedByAdminId + "]";
+				+ ", phoneNo=" + phoneNo + ", dateOfBirth=" + dateOfBirth + ", address=" + address + ", gender="
+				+ gender + ", education=" + education + ", percentage10=" + percentage10 + ", percentage12="
+				+ percentage12 + ", percentageDeg=" + percentageDeg + ", joinDate=" + joinDate + ", department="
+				+ department + ", position=" + position + ", salary=" + salary + ", supervisor=" + supervisor
+				+ ", project=" + project + ", status=" + status + ", addedByAdminId=" + addedByAdminId + "]";
 	}
 
 	public Employee() {
@@ -41,24 +46,29 @@ public class Employee {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(long id, String firstName, String secondName, String email, String phoneNo, String address,
-			String gender, String joinDate, String department, String position, String salary, String supervisor,
-			String project, String education, String status, long addedByAdminId) {
+	public Employee(long id, String firstName, String secondName, String email, String phoneNo, String dateOfBirth,
+			String address, String gender, String education, String percentage10, String percentage12,
+			String percentageDeg, String joinDate, String department, String position, String salary, String supervisor,
+			String project, String status, long addedByAdminId) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.secondName = secondName;
 		this.email = email;
 		this.phoneNo = phoneNo;
+		this.dateOfBirth = dateOfBirth;
 		this.address = address;
 		this.gender = gender;
+		this.education = education;
+		this.percentage10 = percentage10;
+		this.percentage12 = percentage12;
+		this.percentageDeg = percentageDeg;
 		this.joinDate = joinDate;
 		this.department = department;
 		this.position = position;
 		this.salary = salary;
 		this.supervisor = supervisor;
 		this.project = project;
-		this.education = education;
 		this.status = status;
 		this.addedByAdminId = addedByAdminId;
 	}
@@ -103,6 +113,14 @@ public class Employee {
 		this.phoneNo = phoneNo;
 	}
 
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -117,6 +135,38 @@ public class Employee {
 
 	public void setGender(String gender) {
 		this.gender = gender;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public String getPercentage10() {
+		return percentage10;
+	}
+
+	public void setPercentage10(String percentage10) {
+		this.percentage10 = percentage10;
+	}
+
+	public String getPercentage12() {
+		return percentage12;
+	}
+
+	public void setPercentage12(String percentage12) {
+		this.percentage12 = percentage12;
+	}
+
+	public String getPercentageDeg() {
+		return percentageDeg;
+	}
+
+	public void setPercentageDeg(String percentageDeg) {
+		this.percentageDeg = percentageDeg;
 	}
 
 	public String getJoinDate() {
@@ -167,14 +217,6 @@ public class Employee {
 		this.project = project;
 	}
 
-	public String getEducation() {
-		return education;
-	}
-
-	public void setEducation(String education) {
-		this.education = education;
-	}
-
 	public String getStatus() {
 		return status;
 	}
@@ -189,6 +231,7 @@ public class Employee {
 
 	public void setAddedByAdminId(long addedByAdminId) {
 		this.addedByAdminId = addedByAdminId;
-	} 
+	}
+	
 	
 }

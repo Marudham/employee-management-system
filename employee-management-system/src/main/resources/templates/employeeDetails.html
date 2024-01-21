@@ -17,6 +17,12 @@
 				<li class="nav-item"><a class="nav-link" th:href="@{/admin}">Admin Dashboard</a></li>
 			</ul>
 		</div>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
 	</nav>
 
 	<div class="employee-details">
@@ -28,15 +34,19 @@
 
 			<label>Email:</label> <span th:text="${employee.email}"></span> 
 			<label>Phone Number:</label> <span th:text="${employee.phoneNo}"></span> 
+			<label>Date Of Birth:</label> <span th:text="${employee.dateOfBirth}"></span> 
 			<label>Address:</label> <span th:text="${employee.address}"></span> 
 			<label>Gender:</label> <span th:text="${employee.gender}"></span> 
+			<label>Education:</label> <span th:text="${employee.education}"></span> 
+			<label>Percentage 10th std:</label> <span th:text="${employee.percentage10}"></span> 
+			<label>Percentage 12th std:</label> <span th:text="${employee.percentage12}"></span> 
+			<label>Percentage Degree:</label> <span th:text="${employee.percentageDeg}"></span> 
 			<label>Join Date:</label> <span th:text="${employee.joinDate}"></span> 
 			<label>Department:</label> <span th:text="${employee.department}"></span> 
 			<label>Position:</label> <span th:text="${employee.position}"></span> 
 			<label>Salary:</label> <span th:text="${employee.salary}"></span> 
 			<label>Supervisor:</label> <span th:text="${employee.supervisor}"></span> 
 			<label>Project:</label> <span th:text="${employee.project}"></span> 
-			<label>Education:</label> <span th:text="${employee.education}"></span> 
 			<label>Status:</label> <span th:text="${employee.status}"></span>
 		</div>
 		<div class="button-container">

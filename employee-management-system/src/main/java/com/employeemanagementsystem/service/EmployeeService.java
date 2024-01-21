@@ -22,4 +22,6 @@ public interface EmployeeService {
 
 	List<Employee> filterEmployees(String department, String position);
 
+	boolean isPhoneNoExist(String phoneNo);
+
 }

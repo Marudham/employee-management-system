@@ -19,11 +19,15 @@ public class NavController {
 	}
 	
 	@GetMapping("/addEmployee")
-	public String addEmployee() {
-		return "addEmployee";
+	public String addEmployee(HttpSession session) {
+		if(session.getAttribute("user") != null) {
+			return "addEmployee";
+		}else {
+			return "login";
+		}
 	}
 	
-	@GetMapping("/index")
+	@GetMapping("/logout")
 	public String index(HttpSession session) {
 		session.invalidate();
 		return "login";

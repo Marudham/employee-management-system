@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.employeemanagementsystem.service.SuperAdminService;
+
+import jakarta.servlet.http.HttpSession;
+
 import com.employeemanagementsystem.entities.Admin;
 import com.employeemanagementsystem.service.AdminService;
 import com.employeemanagementsystem.service.EmailService;
@@ -21,14 +24,15 @@ public class SuperAdminController {
 
 	@Autowired
 	AdminService adminService;
-	
+
 	@Autowired
 	EmailService emailService;
 
 	@PostMapping("/superAdminLogin")
-	public String superAdminLogin(@RequestParam String email, @RequestParam String password, Model model) {
+	public String superAdminLogin(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
 		if(superAdminService.isSuperAdminExist(email)) {
 			if(superAdminService.isValidSuperAdmin(email, password)) {
+				session.setAttribute("superAdmin", email);
 				model.addAttribute("admins", adminService.getAllAdmins());
 				return "superAdmin";
 			}else {
@@ -42,17 +46,21 @@ public class SuperAdminController {
 	}
 
 	@GetMapping("/approve/{id}")
-	public String approve(@PathVariable Long id, Model model) {
+	public String approve(@PathVariable Long id, Model model, HttpSession session) {
 		try {
-			Admin admin = adminService.getAdminById(id);
-			admin.setAdmin(true);
-			adminService.updateAdmin(admin);
-			String subject = "Approval Status - Employee Management Status";
-			String body = "You Have Been Approved By the SUPER_ADMIN";
-			emailService.sendEmail(admin.getEmail(), subject, body);
-			model.addAttribute("admins", adminService.getAllAdmins());
-			model.addAttribute("message", "Approve Status has been Updated");
-			return "superAdmin";
+			if(session.getAttribute("superAdmin") != null) {
+				Admin admin = adminService.getAdminById(id);
+				admin.setAdmin(true);
+				adminService.updateAdmin(admin);
+				String subject = "Approval Status - Employee Management Status";
+				String body = "You Have Been Approved By the SUPER_ADMIN";
+				emailService.sendEmail(admin.getEmail(), subject, body);
+				model.addAttribute("admins", adminService.getAllAdmins());
+				model.addAttribute("message", "Approve Status has been Updated");
+				return "superAdmin";
+			}else {
+				return "superAdminLogin";
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -61,19 +69,23 @@ public class SuperAdminController {
 			return "superAdmin";
 		}
 	}
-	
+
 	@GetMapping("/disapprove/{id}")
-	public String disapprove(@PathVariable Long id, Model model) {
+	public String disapprove(@PathVariable Long id, Model model, HttpSession session) {
 		try {
-			Admin admin = adminService.getAdminById(id);
-			admin.setAdmin(false);
-			adminService.updateAdmin(admin);
-			String subject = "Approval Status - Employee Management Status";
-			String body = "You Have Been Disapproved By the SUPER_ADMIN";
-			emailService.sendEmail(admin.getEmail(), subject, body);
-			model.addAttribute("admins", adminService.getAllAdmins());
-			model.addAttribute("message", "Approve Status has been Updated");
-			return "superAdmin";
+			if(session.getAttribute("superAdmin") != null) {
+				Admin admin = adminService.getAdminById(id);
+				admin.setAdmin(false);
+				adminService.updateAdmin(admin);
+				String subject = "Approval Status - Employee Management Status";
+				String body = "You Have Been Disapproved By the SUPER_ADMIN";
+				emailService.sendEmail(admin.getEmail(), subject, body);
+				model.addAttribute("admins", adminService.getAllAdmins());
+				model.addAttribute("message", "Approve Status has been Updated");
+				return "superAdmin";
+			}else {
+				return "superAdminLogin";
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -84,12 +96,16 @@ public class SuperAdminController {
 	}
 
 	@GetMapping("/sendMail/{id}")
-	public String sendMail(@PathVariable Long id, Model model) {
+	public String sendMail(@PathVariable Long id, Model model, HttpSession session) {
 		try {
-			adminService.sendVerificationEmail(adminService.getAdminById(id).getEmail());
-			model.addAttribute("message", "Verification Email has been Sent");
-			model.addAttribute("admins", adminService.getAllAdmins());
-			return "superAdmin";
+			if(session.getAttribute("superAdmin") != null) {
+				adminService.sendVerificationEmail(adminService.getAdminById(id).getEmail());
+				model.addAttribute("message", "Verification Email has been Sent");
+				model.addAttribute("admins", adminService.getAllAdmins());
+				return "superAdmin";
+			}else {
+				return "superAdminLogin";
+			}
 		}
 		catch(Exception e) {
 			e.printStackTrace();
@@ -100,12 +116,17 @@ public class SuperAdminController {
 	}
 
 	@GetMapping("/deleteAdmin/{id}")
-	public String deleteAdmin(@PathVariable Long id, Model model) {
+	public String deleteAdmin(@PathVariable Long id, Model model, HttpSession session) {
 		try {
-			adminService.deleteAdmin(id);
-			model.addAttribute("message", "Admin has been Deleted");
-			model.addAttribute("admins", adminService.getAllAdmins());
-			return "superAdmin";
+			if(session.getAttribute("superAdmin") != null) {
+				adminService.deleteAdmin(id);
+				model.addAttribute("message", "Admin has been Deleted");
+				model.addAttribute("admins", adminService.getAllAdmins());
+				return "superAdmin";
+			}else {
+				return "superAdminLogin";
+			}
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 			model.addAttribute("message", "Problem Occured While Deleting the Admin, Please try again");
@@ -113,11 +134,15 @@ public class SuperAdminController {
 			return "superAdmin";
 		}
 	}
-	
+
 
 	@GetMapping("/superAdmin")
-	public String superAdmin(Model model) {
-		model.addAttribute("admins", adminService.getAllAdmins());
-		return "superAdmin";
+	public String superAdmin(Model model,HttpSession session) {
+		if(session.getAttribute("superAdmin") != null) {
+			model.addAttribute("admins", adminService.getAllAdmins());
+			return "superAdmin";
+		}else {
+			return "superAdminLogin";
+		}
 	}
 }

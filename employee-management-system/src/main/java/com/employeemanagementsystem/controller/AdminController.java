@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.employeemanagementsystem.entities.Employee;
 import com.employeemanagementsystem.entities.Admin;
 import com.employeemanagementsystem.service.EmployeeService;
 import com.employeemanagementsystem.service.AdminService;
@@ -31,6 +30,7 @@ public class AdminController {
 			if(adminService.isValidAdmin(email,password)) {
 				if(adminService.getAdmin(email).isAdmin()) {
 					if(adminService.getAdmin(email).isVerified()) {
+						session.setAttribute("user", adminService.getAdmin(email).getUsername());
 						session.setAttribute("adminId", adminService.getAdmin(email).getId());
 						model.addAttribute("employees", employeeService.fetchAllEmployeeByAdminId((long)session.getAttribute("adminId")));
 						return "adminHome";
