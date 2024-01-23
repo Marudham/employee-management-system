@@ -31,11 +31,16 @@ public class EmployeeLoginService {
 	}
 
 	public boolean verifyToken(String token, Long id) {
+		
 		if(employeeLoginRepo.findById(id).get().getVerificationToken().equals(token)) {
 			return true;
 		}else {
 			return false;
 		}
+	}
+
+	public EmployeeLogin getEmployeeLogin(Long id) {
+		return employeeLoginRepo.findById(id).get();
 	} 
 
 }

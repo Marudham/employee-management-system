@@ -20,6 +20,9 @@ public class AdminServiceImplementation implements AdminService{
 	@Autowired
 	EmailService emailService;
 	
+	@Autowired
+	PasswordEncryptionService passwordEncryptionService;
+	
 	@Override
 	public boolean isAdminExist(String email) {
 		if(adminRepo.findByEmail(email) == null) {
@@ -33,7 +36,9 @@ public class AdminServiceImplementation implements AdminService{
 	public int addAdmin(Admin admin) {
 		try {
 			String token = tokenService.generateUniqueToken();
+			
 			admin.setEmailVerificationToken(token);
+			admin.setPassword(passwordEncryptionService.encryptPassword(admin.getPassword()));
 			adminRepo.save(admin);
 			String subject = "Account Verification - Employee Management System";
 			String body = "To verify your account, click the following link: "
@@ -49,7 +54,7 @@ public class AdminServiceImplementation implements AdminService{
 
 	@Override
 	public boolean isValidAdmin(String email, String password) {
-		if(adminRepo.findByEmail(email).getPassword().equals(password)) {
+		if(passwordEncryptionService.checkPassword(password, adminRepo.findByEmail(email).getPassword())) {
 			return true;
 		}else {
 			return false;

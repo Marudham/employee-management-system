@@ -30,17 +30,23 @@ public class SuperAdminController {
 
 	@PostMapping("/superAdminLogin")
 	public String superAdminLogin(@RequestParam String email, @RequestParam String password, Model model, HttpSession session) {
-		if(superAdminService.isSuperAdminExist(email)) {
-			if(superAdminService.isValidSuperAdmin(email, password)) {
-				session.setAttribute("superAdmin", email);
-				model.addAttribute("admins", adminService.getAllAdmins());
-				return "superAdmin";
+		try {
+			if(superAdminService.isSuperAdminExist(email)) {
+				if(superAdminService.isValidSuperAdmin(email, password)) {
+					session.setAttribute("superAdmin", email);
+					model.addAttribute("admins", adminService.getAllAdmins());
+					return "superAdmin";
+				}else {
+					model.addAttribute("message", "Incorrect Password");
+					return "superAdminLogin";
+				}
 			}else {
-				model.addAttribute("message", "Incorrect Password");
+				model.addAttribute("message", "Entered Email Does not exist");
 				return "superAdminLogin";
 			}
-		}else {
-			model.addAttribute("message", "Entered Email Does not exist");
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.addAttribute("message", "Problem occured while Verifying the Login, Please try again");
 			return "superAdminLogin";
 		}
 	}
@@ -64,9 +70,14 @@ public class SuperAdminController {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", "Some problem occured while updating approve status");
-			model.addAttribute("admins", adminService.getAllAdmins());
-			return "superAdmin";
+			try {
+				model.addAttribute("message", "Some problem occured while updating approve status");
+				model.addAttribute("admins", adminService.getAllAdmins());
+				return "superAdmin";
+			}catch(Exception e1){
+				e1.printStackTrace();
+				return "superAdminLogin";
+			}		
 		}
 	}
 
@@ -89,9 +100,14 @@ public class SuperAdminController {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", "Some problem occured while updating approve status");
-			model.addAttribute("admins", adminService.getAllAdmins());
-			return "superAdmin";
+			try {
+				model.addAttribute("message", "Some problem occured while updating approve status");
+				model.addAttribute("admins", adminService.getAllAdmins());
+				return "superAdmin";
+			}catch(Exception e1){
+				e1.printStackTrace();
+				return "superAdminLogin";
+			}	
 		}
 	}
 
@@ -109,9 +125,14 @@ public class SuperAdminController {
 		}
 		catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", "Problem Occured While sending Email, Enter a Valid Email or try Again");
-			model.addAttribute("admins", adminService.getAllAdmins());
-			return "superAdmin";
+			try {
+				model.addAttribute("message", "Problem Occured While sending Email, Enter a Valid Email or try Again");
+				model.addAttribute("admins", adminService.getAllAdmins());
+				return "superAdmin";
+			}catch(Exception e1){
+				e1.printStackTrace();
+				return "superAdminLogin";
+			}	
 		}
 	}
 
@@ -129,19 +150,29 @@ public class SuperAdminController {
 			
 		}catch(Exception e) {
 			e.printStackTrace();
-			model.addAttribute("message", "Problem Occured While Deleting the Admin, Please try again");
-			model.addAttribute("admins", adminService.getAllAdmins());
-			return "superAdmin";
+			try {
+				model.addAttribute("message", "Problem Occured While Deleting the Admin, Please try again");
+				model.addAttribute("admins", adminService.getAllAdmins());
+				return "superAdmin";
+			}catch(Exception e1){
+				e1.printStackTrace();
+				return "superAdminLogin";
+			}	
 		}
 	}
 
 
 	@GetMapping("/superAdmin")
 	public String superAdmin(Model model,HttpSession session) {
-		if(session.getAttribute("superAdmin") != null) {
-			model.addAttribute("admins", adminService.getAllAdmins());
-			return "superAdmin";
-		}else {
+		try {
+			if(session.getAttribute("superAdmin") != null) {
+				model.addAttribute("admins", adminService.getAllAdmins());
+				return "superAdmin";
+			}else {
+				return "superAdminLogin";
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 			return "superAdminLogin";
 		}
 	}

@@ -44,7 +44,7 @@ public class EmployeeLoginController {
 				employeeLogin.setVerificationToken(token);
 				employeeLoginService.addEmployeeLogin(employeeLogin);
 				String subject = "Employee Login - Employee Management System";
-				String body = "To View Employee Details click the following link: "
+				String body = "To View Employee Details click the following link: <br>"
 							+ "http://localhost:8080/verifyEmployee?token=" + employeeLogin.getVerificationToken() 
 			                + "&id=" + employeeLogin.getId();
 				emailService.sendEmail(employeeLogin.getEmail(), subject, body);
@@ -65,7 +65,7 @@ public class EmployeeLoginController {
 	public String verifyEmployee(@RequestParam String token, @RequestParam Long id, Model model) {
 		try {
 			if(employeeLoginService.verifyToken(token,id)) {
-				Employee employee = employeeService.getEmployeeById(id);
+				Employee employee = employeeService.getEmployeeByEmail(employeeLoginService.getEmployeeLogin(id).getEmail());
 				model.addAttribute("employee", employee);
 				model.addAttribute("adminInfo", adminService.getAdminById(employee.getAddedByAdminId()));
 				return "employeeHome";

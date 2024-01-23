@@ -12,6 +12,9 @@ public class SuperAdminService {
 	@Autowired
 	SuperAdminRepository repo;
 
+	@Autowired
+	PasswordEncryptionService passwordEncryptionService;
+	
 	public SuperAdmin getSuperAdmin(String email) {
 		return	repo.findByEmail(email);
 	}
@@ -25,7 +28,7 @@ public class SuperAdminService {
 	}
 	
 	public boolean isValidSuperAdmin(String email, String password) {
-		if(repo.findByEmail(email).getPassword().equals(password)) {
+		if(passwordEncryptionService.checkPassword(password, repo.findByEmail(email).getPassword())) {
 			return true;
 		}else {
 			return false;
