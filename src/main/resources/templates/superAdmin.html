@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Super Admin - Dashboard</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<style type="text/css">
+.navbar-nav {
+	float: none;
+}
+
+.navbar-nav .nav-link {
+	padding-right: 20px;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">Employee Management System</a>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/superAdmin}">Super Admin Dashboard</a></li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<h1>Admin List</h1>
+		</div>
+		<div class="row">
+			<div class="col-lg-3">
+				<a class="btn btn-primary btn-sm mb-3">
+					Filter Admin</a>
+			</div>
+		</div>
+		<div th:if="${message}" style="color:red;">
+			<p th:text="${message}"></p>
+		</div>	
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Admin User Name</th>
+					<th>Admin Email</th>
+					<th>Admin Verified Status</th>
+					<th>Admin Approve Status</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="admin: ${admins}">
+					<td th:text="${admin.username}"></td>
+					<td th:text="${admin.email}"></td>
+					<td>
+						<div th:if="${admin.isVerified}">
+							Verified
+						</div>
+						<div th:unless="${admin.isVerified}">
+							Not Verified
+							<a th:href="@{/sendMail/{id}(id=${admin.id})}"
+						class="btn btn-primary">Send Mail</a>
+						</div>
+					</td>
+					<td>
+						<div th:if="${admin.isAdmin}">
+							Approved
+							<a th:href="@{/disapprove/{id}(id=${admin.id})}"
+						class="btn btn-primary">Disapprove</a>
+						</div>
+						<div th:unless="${admin.isAdmin}">
+							Not Approved
+							<a th:href="@{/approve/{id}(id=${admin.id})}"
+						class="btn btn-primary">Approve</a>
+						</div>
+					</td>
+					<td> <a th:href="@{/deleteAdmin/{id}(id=${admin.id})}"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tbody>
+
+		</table>
+
+	</div>
+	
+
+</body>
+</html>

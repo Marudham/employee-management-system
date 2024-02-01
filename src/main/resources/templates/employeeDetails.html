@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Employee Details</title>
+<link rel="stylesheet" th:href="@{/employeeDetailsStyle.css}" >
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">Employee Management System</a>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/admin}">Admin Dashboard</a></li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="employee-details">
+		<h2>Employee Details</h2>
+		<div class="details-form">
+			<label>First Name:</label> <span th:text="${employee.firstName}"></span>
+
+			<label>Last Name:</label> <span th:text="${employee.secondName}"></span>
+
+			<label>Email:</label> <span th:text="${employee.email}"></span> 
+			<label>Phone Number:</label> <span th:text="${employee.phoneNo}"></span> 
+			<label>Date Of Birth:</label> <span th:text="${employee.dateOfBirth}"></span> 
+			<label>Address:</label> <span th:text="${employee.address}"></span> 
+			<label>Gender:</label> <span th:text="${employee.gender}"></span> 
+			<label>Education:</label> <span th:text="${employee.education}"></span> 
+			<label>Percentage 10th std:</label> <span th:text="${employee.percentage10}"></span> 
+			<label>Percentage 12th std:</label> <span th:text="${employee.percentage12}"></span> 
+			<label>Percentage Degree:</label> <span th:text="${employee.percentageDeg}"></span> 
+			<label>Join Date:</label> <span th:text="${employee.joinDate}"></span> 
+			<label>Department:</label> <span th:text="${employee.department}"></span> 
+			<label>Position:</label> <span th:text="${employee.position}"></span> 
+			<label>Salary:</label> <span th:text="${employee.salary}"></span> 
+			<label>Supervisor:</label> <span th:text="${employee.supervisor}"></span> 
+			<label>Project:</label> <span th:text="${employee.project}"></span> 
+			<label>Status:</label> <span th:text="${employee.status}"></span>
+		</div>
+		<div class="button-container">
+			<a th:href="@{/employee/edit/{id}(id=${employee.id})}"><button class="update">Update</button></a>
+			<a th:href="@{/deleteEmployee/{id}(id=${employee.id})}"><button class="delete">Delete</button></a>
+			<a th:href="@{/admin}"><button class="back">Go Back</button></a>
+		</div>
+	</div>
+</body>
+</html>

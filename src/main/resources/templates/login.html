@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Login</title>
+<link rel="stylesheet" th:href="@{/loginStyle.css}">
+</head>
+<body>
+	<form action="/login" method="post">
+		<h2>Login</h2>
+		<div class="message" th:if="${message}">
+			<p th:text="${message}"></p>
+		</div>
+		<div th:if="${verify}">
+			<p></p>
+			<br> <br>
+		</div>
+		<input type="email" name="email" placeholder="Email" required>
+		<input type="password" name="password" placeholder="Password" required>
+		<a class="fp" href="/forgotPassword">Forgot Password ?</a>
+		<button type="submit">Login</button>
+		<p class="size"><!-- class="super" href="/superAdminLogin"> Super Admin</a> |
+			<a  -->
+			Login as - <a class="emp" href="/employeeLogin"> Employee</a>
+		</p>
+		<p class="size">
+			New User ? <a class="reg" href="/register">Register</a>
+		</p>
+	</form>
+	<div class="verify-div" th:if="${verify}">
+		<a href="/requestEmail"><button class="verify">Verify
+				Email</button></a>
+		<p></p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+
+.employee-details {
+	margin: 50px auto;
+	width: 60%;
+	border: 1px solid #ccc;
+	padding: 20px;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	background-color: #fff;
+	font-family: Arial, sans-serif;
+}
+
+.employee-details h2 {
+	text-align: center;
+	color: #333;
+	margin-bottom: 20px;
+}
+
+.details-form {
+	width: 100%;
+}
+
+.details-form label {
+	display: block;
+	margin-bottom: 5px;
+	font-weight: bold;
+	color: #444;
+}
+
+.details-form span {
+	display: block;
+	margin-bottom: 15px;
+	color: #666;
+}
+
+.button-container {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.button-container button {
+	padding: 10px 20px;
+	margin: 0 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.button-container button.update {
+	background-color: #007bff;
+	color: #fff;
+}
+
+.button-container button.delete {
+	background-color: #dc3545;
+	color: #fff;
+}
+
+.button-container button.back {
+	background-color: #6c757d;
+	color: #fff;
+}

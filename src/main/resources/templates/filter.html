@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Admin Home Page</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">Employee Management System</a>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/admin}">Admin Dashboard</a></li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="container">
+		<h1>Employee Management</h1>
+
+		<form action="/applyFilter" method="get" class="mb-4">
+			<div class="form-row">
+				<div class="form-group col-md-3">
+					<label for="filterDepartment">Filter Based on:</label> <select
+						id="filterDepartment" name="filterBasedOn" class="form-control">
+						<option value="">-- select --</option>
+						<option value="firstName">First Name</option>
+						<option value="secondName">Second Name</option>
+						<option value="email">Email</option>
+						<option value="phoneNo">Phone No</option>
+						<option value="address">Address</option>
+						<option value="gender">Gender</option>
+						<option value="joinDate">Join Date</option>
+						<option value="department">Department</option>
+						<option value="position">Position</option>
+						<option value="salary">Salary</option>
+						<option value="supervisor">Supervisor</option>
+						<option value="project">Project</option>
+						<option value="education">Education</option>
+						<option value="status">Status</option>
+					</select>
+				</div>
+				<div class="form-group col-md-3">
+					<label for="filterPosition">Filter Value:</label> 
+					<input type="text" id="filterPosition" name="filterValue"placeholder="Enter Filter Value" class="form-control"
+					/>
+				</div>
+
+				<div class="form-group col-md-2">
+					<button type="submit" class="btn btn-primary">Apply Filter</button>
+				</div>
+			</div>
+		</form>
+
+		<table class="table table-striped table-bordered">
+			<thead class="table-dark">
+				<tr>
+					<th>Employee First Name</th>
+					<th>Employee Second Name</th>
+					<th>Employee Email</th>
+					<th>All Details</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="employee: ${filterEmployees}">
+					<td th:text="${employee.firstName}"></td>
+					<td th:text="${employee.secondName}"></td>
+					<td th:text="${employee.email}"></td>
+					<td><a th:href="@{/employeeDetails/{id}(id=${employee.id})}">View
+							All Details</a></td>
+					<td><a th:href="@{/employee/edit/{id}(id=${employee.id})}"
+						class="btn btn-primary">Update</a> <a
+						th:href="@{/deleteEmployee/{id}(id=${employee.id})}"
+						class="btn btn-danger">Delete</a></td>
+				</tr>
+			</tbody>
+
+		</table>
+	</div>
+
+</body>
+</html>

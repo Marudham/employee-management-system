@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Employee Details</title>
+<link rel="stylesheet" th:href="@{/employeeHome.css}">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+<style type="text/css">
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">Employee Details</a>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+	<div class="employee-details">
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">ID:</div>
+			<div class="details-value" th:text="${employee.id}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">First Name:</div>
+			<div class="details-value" th:text="${employee.firstName}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Last Name:</div>
+			<div class="details-value" th:text="${employee.secondName}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Email:</div>
+			<div class="details-value" th:text="${employee.email}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Phone No:</div>
+			<div class="details-value" th:text="${employee.phoneNo}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Date of Birth:</div>
+			<div class="details-value" th:text="${employee.dateOfBirth}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Address:</div>
+			<div class="details-value" th:text="${employee.address}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Gender:</div>
+			<div class="details-value" th:text="${employee.gender}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Education:</div>
+			<div class="details-value" th:text="${employee.education}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Percentage 10th std:</div>
+			<div class="details-value" th:text="${employee.percentage10}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Percentage 12th std:</div>
+			<div class="details-value" th:text="${employee.percentage12}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Percentage Degree:</div>
+			<div class="details-value" th:text="${employee.percentageDeg}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Join Date:</div>
+			<div class="details-value" th:text="${employee.joinDate}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Department:</div>
+			<div class="details-value" th:text="${employee.department}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Position:</div>
+			<div class="details-value" th:text="${employee.position}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Salary:</div>
+			<div class="details-value" th:text="${employee.salary}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Supervisor:</div>
+			<div class="details-value" th:text="${employee.supervisor}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Project:</div>
+			<div class="details-value" th:text="${employee.project}"></div>
+		</div>
+		<div class="details-row" th:each="employee:${employee}">
+			<div class="details-label">Status:</div>
+			<div class="details-value" th:text="${employee.status}"></div>
+		</div>
+		<div class="admin-info">
+			<h2>Admin Information</h2>
+			<div class="info-row" th:each="admin:${adminInfo}">
+				<div class="info-label">Username:</div>
+				<div class="info-value" th:text="${admin.username}"></div>
+			</div>
+			<div class="info-row" th:each="admin:${adminInfo}">
+				<div class="info-label">Email:</div>
+				<div class="info-value" th:text="${admin.email}"></div>
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

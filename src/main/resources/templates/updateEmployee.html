@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Employee Management System</title>
+<link rel="stylesheet" th:href="@{/updateEmployee.css}" >
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+		<a class="navbar-brand" href="#">Employee Management System</a>
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/admin}">Admin Dashboard</a></li>
+			</ul>
+		</div>
+		<div class="collapse navbar-collapse justify-content-end"
+			id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" th:href="@{/logout}">Logout</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<h2>Update Employee</h2>
+	<form th:action="@{/updateEmployee/{id} (id=${employee.id})}" th:object="${employee}" method="post">
+		<input 
+			type="text" 
+			name="firstName" 
+			th:field="*{firstName}" 
+			placeholder="First Name" 
+			required> 
+		<input 
+			type="text" 
+			name="secondName" 
+			th:field="*{secondName}" 
+			placeholder="Second Name" 
+			required> 
+		<input type="email" name="email" th:field="*{email}" placeholder="Email" required> 
+		<input type="tel" name="phoneNo" th:field="*{phoneNo}" placeholder="Phone Number" required> 
+		<input type="text" name="dateOfBirth" th:field="*{dateOfBirth}" placeholder="Date Of Birth(DD-MM-YYYY)" required> 
+		<input type="text" name="address" th:field="*{address}" placeholder="Address" required>
+		<select name="gender" required>
+			<option value="">Select Gender</option>
+			<option value="Male">Male</option>
+			<option value="Female">Female</option>
+			<option value="Other">Other</option>
+		</select> 
+		<input type="text" name="education" th:field="*{education}" placeholder="Education"> 
+		<input type="text" name="percentage10" th:field="*{percentage10}" placeholder="Percentage 10th std"> 
+		<input type="text" name="percentage12" th:field="*{percentage12}" placeholder="Percentage 12th std"> 
+		<input type="text" name="percentageDeg" th:field="*{percentageDeg}" placeholder="Percentage Degree"> 
+		<input type="text" name="joinDate" th:field="*{joinDate}" placeholder="Join Date(DD-MM-YYYY)" required> 
+		<input type="text" name="department" th:field="*{department}" placeholder="Department" required> 
+		<input type="text" name="position" th:field="*{position}" placeholder="Position" required> 
+		<input type="text" name="salary" th:field="*{salary}" placeholder="Salary" required> 
+		<input type="text" name="supervisor" th:field="*{supervisor}" placeholder="Supervisor"> 
+		<input type="text" name="project" th:field="*{project}" placeholder="Project"> 
+		<input type="text" name="status" th:field="*{status}" placeholder="Status">
+		<button type="submit">Update Employee</button>
+	</form>
+</body>
+</html>
